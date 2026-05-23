@@ -19,12 +19,35 @@ from django.conf import settings
 from datetime import timedelta
 from django.utils.timezone import now
 from django.urls import reverse
+import requests
 import os
 
 User = get_user_model()
 
+def verify_turnstile(request):
+    token = request.POST.get("cf-turnstile-response")
+
+    data = {
+        "secret": settings.TURNSTILE_SECRET_KEY,
+        "response": token,
+    }
+
+    response = requests.post(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        data=data
+    )
+
+    result = response.json()
+
+    return result.get("success", False)
+
 def register(request):
     if request.method == 'POST':
+
+        if not verify_turnstile(request):
+            messages.error(request, "CAPTCHA verification failed.")
+            return redirect('account:register')
+
         form = RegisterForm(request.POST)
 
         if form.is_valid():
@@ -74,7 +97,10 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, 'account/register.html', {'form': form})
+    return render(request, 'account/register.html', {
+        'form': form,
+        'TURNSTILE_SITE_KEY': settings.TURNSTILE_SITE_KEY
+    })
 
 def activate(request, uidb64, token):
     try:
@@ -204,6 +230,19 @@ def password_reset(request, uidb64, token):
 
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['TURNSTILE_SITE_KEY'] = settings.TURNSTILE_SITE_KEY
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        if not verify_turnstile(request):
+            messages.error(request, "CAPTCHA verification failed.")
+            return redirect('account:login')
+
+        return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
         user = self.request.user
