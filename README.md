@@ -79,7 +79,7 @@ This calculation helps the company determine how much fuel can still be delivere
 
 ## Admin dashboard
 ![Homepage](screenshots/admin.png)
-![Homepage](screenshot/admin1.png)
+![Homepage](screenshots/admin1.png)
 
 ---
 
