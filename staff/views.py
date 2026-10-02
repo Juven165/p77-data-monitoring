@@ -156,7 +156,6 @@ def submit_inventory(request):
     if not allowed_tanks:
         allowed_tanks = {"T1"}
 
-    # 🔥 Default: ipakita lahat kung walang capacity data
     if not any([has_premium, has_regular, has_diesel]):
         has_premium = has_regular = has_diesel = True
         premium_tanks = regular_tanks = diesel_tanks = allowed_tanks
