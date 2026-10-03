@@ -23,24 +23,24 @@ class FuelInventory(models.Model):
 
     # CM measurement from dipstick
     tank1_cm = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
+        max_digits=8,
+        decimal_places=3,
         default=0,
         blank=True,
         null=True
     )
 
     tank2_cm = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
+        max_digits=8,
+        decimal_places=3,
         default=0,
         blank=True,
         null=True
     )
 
     tank3_cm = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
+        max_digits=8,
+        decimal_places=3,
         default=0,
         blank=True,
         null=True

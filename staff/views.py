@@ -85,13 +85,13 @@ def submit_inventory(request):
                             station=station,
                             fuel_type=fuel_name,
 
-                            tank1_cm=Decimal(cm or "0") if tank == "T1" else Decimal("0"),
-                            tank2_cm=Decimal(cm or "0") if tank == "T2" else Decimal("0"),
-                            tank3_cm=Decimal(cm or "0") if tank == "T3" else Decimal("0"),
+                            tank1_cm=cm or 0 if tank == "T1" else 0,
+                            tank2_cm=cm or 0 if tank == "T2" else 0,
+                            tank3_cm=cm or 0 if tank == "T3" else 0,
 
-                            tank1_liters=Decimal(liters or "0") if tank == "T1" else Decimal("0"),
-                            tank2_liters=Decimal(liters or "0") if tank == "T2" else Decimal("0"),
-                            tank3_liters=Decimal(liters or "0") if tank == "T3" else Decimal("0"),
+                            tank1_liters=int(liters or 0) if tank == "T1" else 0,
+                            tank2_liters=int(liters or 0) if tank == "T2" else 0,
+                            tank3_liters=int(liters or 0) if tank == "T3" else 0,
                         )
                         has_data = True
 
