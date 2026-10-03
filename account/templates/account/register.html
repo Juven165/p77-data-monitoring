@@ -112,6 +112,11 @@ body {
   transition: 0.3s ease;
 }
 
+.turnstile-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 18px;
+}
 
 .btn-register:hover {
   transform: translateY(-2px);
@@ -191,7 +196,9 @@ body {
             </div>
         </div>
 
-      <div class="cf-turnstile" data-sitekey="{{ TURNSTILE_SITE_KEY }}"></div>
+      <div class="turnstile-wrapper">
+          <div class="cf-turnstile" data-sitekey="{{ TURNSTILE_SITE_KEY }}"></div>
+      </div>
       <button type="submit" class="btn-register">Register</button>
     </form>
 
