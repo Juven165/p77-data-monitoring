@@ -21,16 +21,49 @@ class FuelInventory(models.Model):
 
     fuel_type = models.CharField(max_length=20, choices=FUEL_CHOICES)
 
-    # CM measurement from deepstick
-    tank1_cm = models.IntegerField(default=0, blank=True, null=True)
-    tank2_cm = models.IntegerField(default=0, blank=True, null=True)
-    tank3_cm = models.IntegerField(default=0, blank=True, null=True)
+    # CM measurement from dipstick
+    tank1_cm = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=True,
+        null=True
+    )
+
+    tank2_cm = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=True,
+        null=True
+    )
+
+    tank3_cm = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=True,
+        null=True
+    )
 
     # Liters equivalent
-    tank1_liters = models.IntegerField(default=0)
-    tank2_liters = models.IntegerField(default=0)
-    tank3_liters = models.IntegerField(default=0)
+    tank1_liters = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
 
+    tank2_liters = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    tank3_liters = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
     dispatch_liters = models.FloatField(default=0)
 
     is_read = models.BooleanField(default=False)
