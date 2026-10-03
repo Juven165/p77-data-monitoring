@@ -62,11 +62,11 @@
                         <!-- CM -->
                         <td>
                             {% if report.tank1_liters > 0 %}
-                                {{ report.tank1_cm }}
+                                {{ report.tank1_cm|floatformat:2 }}
                             {% elif report.tank2_liters > 0 %}
-                                {{ report.tank2_cm }}
+                                {{ report.tank2_cm|floatformat:2 }}
                             {% elif report.tank3_liters > 0 %}
-                                {{ report.tank3_cm }}
+                                {{ report.tank3_cm|floatformat:2 }}
                             {% endif %}
                         </td>
 
