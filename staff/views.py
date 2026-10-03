@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import FuelInventory, Notification
 from account.models import CustomUser
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 @login_required
 def staff_dashboard(request):
@@ -80,19 +80,27 @@ def submit_inventory(request):
                     station = station_map.get(tank)
 
                     if station:
+                        try:
+                            cm_value = Decimal(cm) if cm and cm.strip() else Decimal("0")
+                            liters_value = Decimal(liters) if liters and liters.strip() else Decimal("0")
+                        except InvalidOperation:
+                            messages.error(request, "Please enter a valid CM or liters value.")
+                            return
+
                         FuelInventory.objects.create(
                             user=user,
                             station=station,
                             fuel_type=fuel_name,
 
-                            tank1_cm=cm or 0 if tank == "T1" else 0,
-                            tank2_cm=cm or 0 if tank == "T2" else 0,
-                            tank3_cm=cm or 0 if tank == "T3" else 0,
+                            tank1_cm=cm_value if tank == "T1" else Decimal("0"),
+                            tank2_cm=cm_value if tank == "T2" else Decimal("0"),
+                            tank3_cm=cm_value if tank == "T3" else Decimal("0"),
 
-                            tank1_liters=int(liters or 0) if tank == "T1" else 0,
-                            tank2_liters=int(liters or 0) if tank == "T2" else 0,
-                            tank3_liters=int(liters or 0) if tank == "T3" else 0,
+                            tank1_liters=liters_value if tank == "T1" else Decimal("0"),
+                            tank2_liters=liters_value if tank == "T2" else Decimal("0"),
+                            tank3_liters=liters_value if tank == "T3" else Decimal("0"),
                         )
+
                         has_data = True
 
         save_fuel("Premium", "premium")
