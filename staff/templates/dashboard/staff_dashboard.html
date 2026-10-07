@@ -171,7 +171,7 @@ tr:hover{
         <div class="card-content">
             <h3>Premium</h3>
             <div class="fuel-value">
-                {{ premium_total }} L
+                {{ premium_total|floatformat:2 }} L
             </div>
         </div>
         <i class="fa-solid fa-gas-pump"></i>
@@ -182,7 +182,7 @@ tr:hover{
         <div class="card-content">
             <h3>Regular</h3>
             <div class="fuel-value">
-                {{ regular_total }} L
+                {{ regular_total|floatformat:2 }} L
             </div>
         </div>
         <i class="fa-solid fa-gas-pump"></i>
@@ -194,7 +194,7 @@ tr:hover{
         <div class="card-content">
             <h3>Diesel</h3>
             <div class="fuel-value">
-                {{ diesel_total }} L
+                {{ diesel_total|floatformat:2 }} L
             </div>
         </div>
         <i class="fa-solid fa-gas-pump"></i>
