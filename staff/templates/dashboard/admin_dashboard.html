@@ -316,10 +316,10 @@
                     <!-- PREMIUM -->
                     <td>{% if station.premium_capacity %}{{ station.premium_capacity }}{% endif %}</td>
                     <td class="bg-{{ station.premium_color }}">
-                        {% if station.premium %}{{ station.premium }}{% endif %}
+                        {% if station.premium %}{{ station.premium|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="vacancy-col" style="background:#ff01011f;color:black;">
-                        {% if station.premium_vacancy %}{{ station.premium_vacancy }}{% endif %}
+                        {% if station.premium_vacancy %}{{ station.premium_vacancy|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="dispatch-col">
                         <input type="number" class="dispatch-input"
@@ -339,10 +339,10 @@
                     <!-- REGULAR -->
                     <td>{% if station.regular_capacity %}{{ station.regular_capacity }}{% endif %}</td>
                     <td class="bg-{{ station.regular_color }}">
-                        {% if station.regular %}{{ station.regular }}{% endif %}
+                        {% if station.regular %}{{ station.regular|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="vacancy-col" style="background:#d2f7e2;color:black;">
-                        {% if station.regular_vacancy %}{{ station.regular_vacancy }}{% endif %}
+                        {% if station.regular_vacancy %}{{ station.regular_vacancy|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="dispatch-col">
                         <input type="number" class="dispatch-input"
@@ -362,11 +362,12 @@
 
                     <!-- DIESEL -->
                     <td>{% if station.diesel_capacity %}{{ station.diesel_capacity }}{% endif %}</td>
+                    <!-- DIESEL -->
                     <td class="bg-{{ station.diesel_color }}">
-                        {% if station.diesel %}{{ station.diesel }}{% endif %}
+                        {% if station.diesel %}{{ station.diesel|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="vacancy-col" style="background:#f0f0c8;color:black;">
-                        {% if station.diesel_vacancy %}{{ station.diesel_vacancy }}{% endif %}
+                        {% if station.diesel_vacancy %}{{ station.diesel_vacancy|floatformat:"0" }}{% endif %}
                     </td>
                     <td class="dispatch-col">
                         <input type="number" class="dispatch-input"
