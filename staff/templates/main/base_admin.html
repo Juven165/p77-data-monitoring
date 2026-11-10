@@ -464,7 +464,7 @@ body{
 
 
         <a href="{% url 'adminpanel:station_list' %}"
-           class="{% if request.resolver_match.url_name == '#' %}active{% endif %}">
+           class="{% if request.resolver_match.url_name == 'station_list' %}active{% endif %}">
             <i class="fa-solid fa-gas-pump"></i>
             Station List
         </a>
