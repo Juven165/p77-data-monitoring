@@ -63,6 +63,8 @@ def submit_inventory(request):
                 station_map["T2"] = s
             elif name.endswith("T3"):
                 station_map["T3"] = s
+            elif name.endswith("T4"):
+                station_map["T4"]
 
         
         if not station_map and stations.count() == 1:
@@ -71,7 +73,7 @@ def submit_inventory(request):
         def save_fuel(fuel_name, prefix):
             nonlocal has_data
 
-            for tank in ["T1", "T2", "T3"]:
+            for tank in ["T1", "T2", "T3", "T4"]:
                 cm = request.POST.get(f"{prefix}_{tank.lower()}_cm")
                 liters = request.POST.get(f"{prefix}_{tank.lower()}_liters")
 
@@ -94,10 +96,12 @@ def submit_inventory(request):
                             tank1_cm=cm_value if tank == "T1" else Decimal("0"),
                             tank2_cm=cm_value if tank == "T2" else Decimal("0"),
                             tank3_cm=cm_value if tank == "T3" else Decimal("0"),
+                            tank4_cm=cm_value if tank == "T4" else Decimal("0"),
 
                             tank1_liters=liters_value if tank == "T1" else Decimal("0"),
                             tank2_liters=liters_value if tank == "T2" else Decimal("0"),
                             tank3_liters=liters_value if tank == "T3" else Decimal("0"),
+                            tank4_liters=liters_value if tank == "T4" else Decimal("0"),
                         )
 
                         has_data = True
@@ -192,6 +196,8 @@ def get_active_tank(obj):
         return "T2", obj.tank2_liters
     elif obj.tank3_liters:
         return "T3", obj.tank3_liters
+    elif obj.tank4_liters:
+        return "T4", obj.tank4_liters
 
     return "-", 0
 
@@ -222,12 +228,14 @@ def edit_report(request, id):
             t1_cm = request.POST.get(f"{prefix}_t1_cm")
             t2_cm = request.POST.get(f"{prefix}_t2_cm")
             t3_cm = request.POST.get(f"{prefix}_t3_cm")
+            t4_cm = request.POST.get(f"{prefix}_t4_cm")
 
             t1_l = request.POST.get(f"{prefix}_t1_liters")
             t2_l = request.POST.get(f"{prefix}_t2_liters")
             t3_l = request.POST.get(f"{prefix}_t3_liters")
+            t4_l = request.POST.get(f"{prefix}_t4_liters")
 
-            return t1_cm, t2_cm, t3_cm, t1_l, t2_l, t3_l
+            return t1_cm, t2_cm, t3_cm, t4_cm, t1_l, t2_l, t3_l, t4_l,
 
         if report.fuel_type == "Premium":
             values = get_values("premium")
@@ -236,17 +244,19 @@ def edit_report(request, id):
         elif report.fuel_type == "ULG":
             values = get_values("regular")
 
-        t1_cm, t2_cm, t3_cm, t1_l, t2_l, t3_l = values
+        t1_cm, t2_cm, t3_cm, t4_cm, t1_l, t2_l, t3_l, t4_l = values
 
         t1_cm = int(t1_cm or 0)
         t2_cm = int(t2_cm or 0)
         t3_cm = int(t3_cm or 0)
+        t4_cm = int(t4_cm or 0)
 
         t1_l = int(t1_l or 0)
         t2_l = int(t2_l or 0)
         t3_l = int(t3_l or 0)
+        t4_l = int(t4_l or 0)
 
-        if not any([t1_cm, t2_cm, t3_cm, t1_l, t2_l, t3_l]):
+        if not any([t1_cm, t2_cm, t3_cm, t4_cm, t1_l, t2_l, t3_l, t4_l]):
             messages.error(request, "Please enter at least one value!")
             return redirect("edit_report", id=report.id)
 
@@ -254,8 +264,10 @@ def edit_report(request, id):
             report.tank1_cm == t1_cm and
             report.tank2_cm == t2_cm and
             report.tank3_cm == t3_cm and
+            report.tank4_cm == t4_cm and
             report.tank1_liters == t1_l and
             report.tank2_liters == t2_l and
+            report.tank3_liters == t3_l and
             report.tank3_liters == t3_l
         ):
             messages.warning(request, "No changes detected!")
@@ -264,10 +276,12 @@ def edit_report(request, id):
         report.tank1_cm = t1_cm
         report.tank2_cm = t2_cm
         report.tank3_cm = t3_cm
+        report.tank4_cm = t4_cm
 
         report.tank1_liters = t1_l
         report.tank2_liters = t2_l
         report.tank3_liters = t3_l
+        report.tank4_liters = t4_l
 
         report.save()
 
@@ -297,6 +311,9 @@ def edit_report(request, id):
         elif name.endswith("T3"):
             tank_key = "T3"
             allowed_tanks.add("T3")
+        elif name.endswith("T4"):
+            tank_key = "T4"
+            allowed_tanks.add("T4")
         else:
             tank_key = "T1"
             allowed_tanks.add("T1")
