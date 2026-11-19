@@ -64,7 +64,7 @@ def submit_inventory(request):
             elif name.endswith("T3"):
                 station_map["T3"] = s
             elif name.endswith("T4"):
-                station_map["T4"]
+                station_map["T4"] = s
 
         
         if not station_map and stations.count() == 1:
@@ -152,6 +152,9 @@ def submit_inventory(request):
         elif name.endswith("T3"):
             tank_key = "T3"
             allowed_tanks.add("T3")
+        elif name.endswith("T4"):
+            tank_key = "T4"
+            allowed_tanks.add("T4")
         else:
             tank_key = "T1"
             allowed_tanks.add("T1")

@@ -46,6 +46,14 @@ class FuelInventory(models.Model):
         null=True
     )
 
+    tank4_cm = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0,
+        blank=True,
+        null=True
+    )
+
     # Liters equivalent
     tank1_liters = models.DecimalField(
         max_digits=10,
@@ -64,6 +72,13 @@ class FuelInventory(models.Model):
         decimal_places=2,
         default=0
     )
+
+    tank4_liters = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
     dispatch_liters = models.FloatField(default=0)
 
     is_read = models.BooleanField(default=False)
