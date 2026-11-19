@@ -90,7 +90,20 @@
                                 </p>
 
                                 <p><strong>Liters:</strong><br>
-                                    {{ report.tank3_liters }}
+                                    {{ report.tank4_liters }}
+                                </p>
+
+                                {% elif report.tank4_cm %}
+                                <p><strong>Tank:</strong><br>
+                                    T3
+                                </p>
+
+                                <p><strong>CM:</strong><br>
+                                    {{ report.tank4_cm }}
+                                </p>
+
+                                <p><strong>Liters:</strong><br>
+                                    {{ report.tank4_liters }}
                                 </p>
                             {% endif %}
 
