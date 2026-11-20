@@ -16,6 +16,7 @@ from django.urls import reverse
 from django.db.models import Value
 from django.db.models.functions import Concat
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 User = get_user_model()
 
@@ -341,7 +342,9 @@ def all_reports(request):
     elif status == 'unread':
         reports = reports.filter(is_read=False)
 
-    return render(request, "admin/all_reports.html", {"reports": reports})
+    return render(request, "admin/all_reports.html", {
+        "reports": reports
+    })
 
 @admin_required
 def toggle_read(request, id):
