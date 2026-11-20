@@ -86,6 +86,7 @@
                         <th>T1</th>
                         <th>T2</th>
                         <th>T3</th>
+                        <th>T4</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -114,6 +115,7 @@
                         <td>{{ report.tank1_liters }}</td>
                         <td>{{ report.tank2_liters }}</td>
                         <td>{{ report.tank3_liters }}</td>
+                        <td>{{ report.tank4_liters }}</td>
                        <td>
                             {% if report.is_read %}
                                 <a href="{% url 'adminpanel:read_toggle' report.id %}?next={{ request.path }}"
