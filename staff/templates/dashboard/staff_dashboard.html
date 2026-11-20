@@ -243,6 +243,8 @@ tr:hover{
                     T2
                 {% elif r.tank3_liters|default:0 > 0 %}
                     T3
+                {% elif r.tank4_liters|default:0 > 0 %}
+                    T4
                 {% endif %}
             </td>
 
@@ -253,6 +255,8 @@ tr:hover{
                     {{ r.tank2_cm }}
                 {% elif r.tank3_liters > 0 %}
                     {{ r.tank3_cm }}
+                {% elif r.tank4_liters > 0 %}
+                    {{ r.tank4_cm }}
                 {% endif %}
             </td>
 
@@ -260,6 +264,7 @@ tr:hover{
                 {% if r.tank1_liters > 0 %}{{ r.tank1_liters }}
                 {% elif r.tank2_liters > 0 %}{{ r.tank2_liters }}
                 {% elif r.tank3_liters > 0 %}{{ r.tank3_liters }}
+                {% elif r.tank4_liters > 0 %}{{ r.tank4_liters }}
                 {% else %}-{% endif %}
             </td>
 
