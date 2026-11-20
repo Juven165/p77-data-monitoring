@@ -100,8 +100,9 @@ def admin_dashboard(request):
                 t1 = latest.tank1_liters or 0
                 t2 = latest.tank2_liters or 0
                 t3 = latest.tank3_liters or 0
+                t4 = latest.tank4_liters or 0
 
-                liters = t1 + t2 + t3
+                liters = t1 + t2 + t3 + t4
                 vacancy = capacity - liters
                 latest_time = latest.created_at
 

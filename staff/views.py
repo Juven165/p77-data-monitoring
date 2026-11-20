@@ -28,6 +28,9 @@ def staff_dashboard(request):
             return latest.tank2_liters
         elif latest.tank3_liters:
             return latest.tank3_liters
+        elif latest.tank4_liters:
+            return latest.tank4_liters
+
 
         return 0
 

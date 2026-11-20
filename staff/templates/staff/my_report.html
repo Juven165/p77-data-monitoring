@@ -56,6 +56,8 @@
                                 T2
                             {% elif report.tank3_liters|default:0 > 0 %}
                                 T3
+                            {% elif report.tank4_liters|default:0 > 0 %}
+                                T4
                             {% endif %}
                         </td>
 
@@ -67,6 +69,8 @@
                                 {{ report.tank2_cm|floatformat:2 }}
                             {% elif report.tank3_liters > 0 %}
                                 {{ report.tank3_cm|floatformat:2 }}
+                            {% elif report.tank4_liters > 0 %}
+                                {{ report.tank4_cm|floatformat:2 }}
                             {% endif %}
                         </td>
 
@@ -78,6 +82,8 @@
                                 {{ report.tank2_liters }}
                             {% elif report.tank3_liters > 0 %}
                                 {{ report.tank3_liters }}
+                            {% elif report.tank4_liters > 0 %}
+                                {{ report.tank4_liters }}
                             {% endif %}
                         </td>
 
